@@ -19,6 +19,9 @@ public class AccountController : ControllerBase
         _manager = manager;
     }
 
+    /// <summary>
+    /// Registration
+    /// </summary>
     [HttpPost("register")]
     public async Task<ActionResult<RegisterResult>> Register(RegisterModel registerModel)
     {
@@ -26,6 +29,9 @@ public class AccountController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Login
+    /// </summary>
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginModel model)
     {

@@ -18,6 +18,12 @@ public class GameController : ControllerBase
         _gameService = gameService;
     }
 
+    /// <summary>
+    /// Invite user to a game.
+    /// You can't invite a user that already has active game with you.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost("invite")]
     public async Task<IActionResult> Invite(InviteModel model)
     {
@@ -26,6 +32,11 @@ public class GameController : ControllerBase
             e => BadRequest(new ErrorsDto(e)));
     }
 
+    /// <summary>
+    /// Accept or decline invitation.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost("inviteanswer")]
     public async Task<IActionResult> InviteAnswer(InviteAnswerModel model)
     {
@@ -34,12 +45,20 @@ public class GameController : ControllerBase
             e => BadRequest(new ErrorsDto(e)));
     }
 
+    /// <summary>
+    /// Get all games of this user.
+    /// </summary>
     [HttpGet]
     public async Task<ActionResult<ICollection<GameItemDto>>> GetGames([FromQuery] GetGamesRequestDto dto)
     {
         return Ok(await _gameService.GetGames(dto));
     }
 
+    /// <summary>
+    /// Get detailed model of game
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
     [HttpGet("one")]
     public async Task<IActionResult> GetOne([FromQuery] GetGameRequestDto dto)
     {
@@ -48,6 +67,9 @@ public class GameController : ControllerBase
             e => BadRequest(new ErrorsDto(e)));
     }
 
+    /// <summary>
+    /// Place your figure to a place.
+    /// </summary>
     [HttpPatch("mark")]
     public async Task<IActionResult> PlaceMark(PlaceMarkDto dto)
     {
@@ -56,6 +78,9 @@ public class GameController : ControllerBase
             e => BadRequest(new ErrorsDto(e)));
     }
 
+    /// <summary>
+    /// Just cancel not ended battle.
+    /// </summary>
     [HttpPatch("cancel")]
     public async Task<IActionResult> Cancel(CancelGameDto dto)
     {
