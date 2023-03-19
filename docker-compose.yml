@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - tictactoe_pgdata:/var/lib/postgresql/data
+    restart: always
+volumes:
+  tictactoe_pgdata:
